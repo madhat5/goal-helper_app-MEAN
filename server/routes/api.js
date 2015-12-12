@@ -1,6 +1,6 @@
 var express = require('express'),
     router = express.Router(),
-    passport = require.('passport'),
+    passport = require('passport'),
     User = require('../models/user.js');
 
 // REGISTER
