@@ -138,7 +138,7 @@ App Build Steps:
 	-'enter' through all the prompts
 
 - packages setup --x--
-	- npm install --save express morgan mongoose cookie-parser body-parser express-session passport
+	- npm install --save express morgan mongoose cookie-parser body-parser express-session passport bcrypt-nodejs passport-local passport-local-mongoose
 	- app.js
 		- dependecies
 			- var express = require('express');
