@@ -191,7 +191,7 @@ App Build Steps:
 	- var userMongoose = mongoose.model('users', User);
 	- module.exports = userMongoose;
 
-- routes --o--
+- routes --ox--
 	- touch routes/api.js
 	- build
 		- registration
@@ -199,19 +199,11 @@ App Build Steps:
 		- logout
 	- test
 
-- >>>>>>>>>>>>>>>>>>>>>> mkdir client --o--
-
-- mkdir public --o--
-	- server.js
-		- app.use(express.static('public'));
-	- touch public/index.html
-	- touch public/app.js
-	- touch public/style.css
-
-- test connection --o--
-    - setup basic route
-    - setup basic index.html/app.js
-    - launch server (nodemon/mongod) 
+- mkdir client --o--
+	- touch index.html
+	- touch main.js
+	- mkdir partials
+		- touch home.html
 
 - models build --o--
     - server.js
@@ -227,10 +219,8 @@ App Build Steps:
     - Angular
 
 - Story build --o--
-    - server.js
-    - public/index.html
-    - public/app.js
-
+    - 
+    
 - CSS --o--
 	- bootstrap
 
