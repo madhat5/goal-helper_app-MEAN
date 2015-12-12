@@ -176,21 +176,28 @@ App Build Steps:
  			debug('Silence please...' + 'Curtains up...' + '\n' + 'Server started on: ' + port)
 		});
 
-- models build --ox--
+- models build --x--
     - mkdir models
     	- touch models/user.js
     	- touch models/post.js
     - server.js
     	- var User = require('./models/user.js');
-        - var Goal = require('./models/post');
     - user.js
-    	- var mongoose = require('mongoose');
-        - var userSchema = new mongoose.Schema({ ... });
-        - var User = mongoose.model('User', userSchema);
-        - module.exports = User; 
+		- var mongoose = require('mongoose'),
+		- Schema = mongoose.Schema,
+		- passportLocalMongoose = require('passport-local-mongoose');
+	- var User = new Schema({ ... });
+	- User.plugin(passportLocalMongoose);
+	- var userMongoose = mongoose.model('users', User);
+	- module.exports = userMongoose;
 
-- test connection --o--
-    - setup basic route
+- routes --o--
+	- touch routes/api.js
+	- build
+		- registration
+		- login
+		- logout
+	- test
 
 - >>>>>>>>>>>>>>>>>>>>>> mkdir client --o--
 
@@ -207,6 +214,8 @@ App Build Steps:
     - launch server (nodemon/mongod) 
 
 - models build --o--
+    - server.js
+    	- var Goal = require('./models/goal');
     - post.js
         - var mongoose = require('mongoose');
         - var postSchema = new mongoose.Schema({ ... });

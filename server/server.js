@@ -37,7 +37,7 @@ passport.deserializeUser(User.deserializeUser());
 mongoose.connect('mongodb://localhost/jmny_app')
 
 // MODELS
-// var User = require('./models/user.js');
+var User = require('./models/user.js');
 // var Goal = require('./models/goal.js')
 
 // ROUTES
