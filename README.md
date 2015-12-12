@@ -137,7 +137,7 @@ App Build Steps:
 - npm init --x--
 	-'enter' through all the prompts
 
-- packages setup --ox--
+- packages setup --x--
 	- npm install --save express morgan mongoose cookie-parser body-parser express-session passport
 	- app.js
 		- dependecies
@@ -151,21 +151,43 @@ App Build Steps:
             - path = require('path')
             - hash = require('bcrypt-nodejs')
             - localStrategy = require('passport-local' ).Strategy;
-		- var app = express();
+		- express
+			- var app = express();
 		- middleware
 			- app.use(morgan('dev'));
 			- app.use(cookieParser());
             - app.use(bodyParser.urlencoded({ extended: true}));
-            - app.use(stormpath)
+            - (ADD SCRIPT)
 		- mongo
 			- mongoose.connect('mongodb://localhost/db_name');
+		- passport
+			- (ADD SCRIPT)
+		- routes
+			- (ADD SCRIPT)
+		- error
+			- (ADD SCRIPT)
 
-- app port & listener --o--
+- app port & listener --x--
 	- server.js
+		- var debug = require('debug')('passport-mongo'),
+    	- app = require('./app');
 		- var port = process.env.PORT || 3000;
-		- app.listen(port);
-		- console.log('Silence please...');
-		- setTimeout(function(){console.log('Curtains up...' + '\n' + 'Server started on ' + port)}, 1000);
+		- var server = app.listen(port, function(){
+ 			debug('Silence please...' + 'Curtains up...' + '\n' + 'Server started on: ' + port)
+		});
+
+- models build --ox--
+    - mkdir models
+    	- touch models/user.js
+    	- touch models/post.js
+    - server.js
+    	- var User = require('./models/user.js');
+        - var Goal = require('./models/post');
+    - user.js
+    	- var mongoose = require('mongoose');
+        - var userSchema = new mongoose.Schema({ ... });
+        - var User = mongoose.model('User', userSchema);
+        - module.exports = User; 
 
 - test connection --o--
     - setup basic route
@@ -185,10 +207,6 @@ App Build Steps:
     - launch server (nodemon/mongod) 
 
 - models build --o--
-    - mkdir models
-    - touch models/post.js
-    - server.js
-        - var Post = require('./models/post');
     - post.js
         - var mongoose = require('mongoose');
         - var postSchema = new mongoose.Schema({ ... });
