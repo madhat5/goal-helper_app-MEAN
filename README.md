@@ -220,7 +220,7 @@ App Build Steps:
 
 - Story build --o--
     - 
-    
+
 - CSS --o--
 	- bootstrap
 
@@ -259,6 +259,10 @@ Reference
 ---
 ---
 Comments/Notes:
+
+- explain use of angular AND jquery in passport login/app setup
+	- cf client/main.js
+	- use a bunch of console.logs
 
 - tips:
     - Kyle (dragable div)
