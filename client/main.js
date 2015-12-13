@@ -5,7 +5,7 @@ myApp.config(function ($routeProvider){
     .when('/', {templateUrl: 'partials/home.html'})
     .when('/login', {
       templateUrl: 'partials/login.html',
-      controller: 'loginConteroller',
+      controller: 'loginController',
       access: {restricted: false}
     })
     .when('/logout', {
@@ -37,11 +37,3 @@ myApp.run(function ($rootScope, $location, $route, AuthService){
 });
 
 // TEMP STUFF ///////////////////////////////////////////
-
-myApp.run(function ($rootScope, $location, $route, AuthService) {
-  $rootScope.$on('$routeChangeStart', function (event, next, current) {
-    if (next.access.restricted && AuthService.isLoggedIn() === false) {
-      $location.path('/login');
-    }
-  });
-});

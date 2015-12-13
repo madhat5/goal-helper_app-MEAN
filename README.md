@@ -224,6 +224,8 @@ App Build Steps:
 - CSS --o--
 	- bootstrap
 
+- Debug:
+	- check ALL syntax in ALL files
 
 - Remaining:
 	- 
@@ -264,7 +266,7 @@ Comments/Notes:
 	- cf client/main.js
 	- use a bunch of console.logs
 
-- tips:
+- shoutouts:
     - Kyle (dragable div)
     - Katie Z (modal)
     - Robbie (dynamic searches)
