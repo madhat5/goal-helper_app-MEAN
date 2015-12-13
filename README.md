@@ -266,6 +266,8 @@ Comments/Notes:
 	- cf client/main.js
 	- use a bunch of console.logs
 
+- read about ng-disabled
+
 - shoutouts:
     - Kyle (dragable div)
     - Katie Z (modal)
