@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', [ngRoute]);
+var myApp = angular.module('myApp', ['ngRoute']);
 
 myApp.config(function ($routeProvider){
   $routeProvider
@@ -22,7 +22,7 @@ myApp.config(function ($routeProvider){
       access: {restricted: true} // explain this .when??
     })
     .when('/two', {
-      template: '<h1>Open Sesami - Page 2<h1>'
+      template: '<h1>Open Sesami - Page 2<h1>',
       access: {restricted: false} // explain this .when??
     })
     .otherwise ({redirectTo: '/'}); // explain this??
