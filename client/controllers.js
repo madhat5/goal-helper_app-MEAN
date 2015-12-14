@@ -1,7 +1,7 @@
 angular.module('myApp', []).directive('ngmyapp', function(){
   return {
-    controllerAs: 'my',
-    controller: ['$http', '$location', 'AuthService', function ('$http', '$location', 'AuthService'){
+    controllerAs: 'loginController',
+    controller: ['$http', '$location', 'AuthService', function LoginCtrl('$http', '$location', 'AuthService'){
 
         this.$http = $http;
         var self = this;
@@ -31,44 +31,38 @@ angular.module('myApp', []).directive('ngmyapp', function(){
               self.disabled = false;
               self.loginForm = {};
             });
-        }; //end of login function
+        }; // end of login function
+
     }] // end of controller object
   } // end of return
 }); // end of module
 
+
+angular.module('myApp', []).directive('ngmyapp', function(){
+  return {
+    controllerAs: 'logoutController',
+    controller: ['$http', '$location', 'AuthService', function LogoutCtrl('$http', '$location', 'AuthService'){
+
+        this.$http = $http;
+        var self = this;
+
+        this.logout = function(){
+          console.log(AuthService.getUserStatus());
+
+          // LOGOUT, FROM SERVICE
+          AuthService.logout()
+            .then(function(){
+              $location.path('/login');
+            });
+
+        }; // end of logout function
+
+    }] // end of controller object
+  } // end of return
+}); // end of module
 // TEMP STUFF ///////////////////////////////////////////
-angular.module('myApp').controller('loginController',
-  ['$scope', '$location', 'AuthService',
-  function ($scope, $location, AuthService) {
 
-    console.log(AuthService.getUserStatus());
-
-    $scope.login = function () {
-
-      // initial values
-      $scope.error = false;
-      $scope.disabled = true;
-
-      // call login from service
-      AuthService.login($scope.loginForm.username, $scope.loginForm.password)
-        // handle success
-        .then(function () {
-          $location.path('/');
-          $scope.disabled = false;
-          $scope.loginForm = {};
-        })
-        // handle error
-        .catch(function () {
-          $scope.error = true;
-          $scope.errorMessage = "Invalid username and/or password";
-          $scope.disabled = false;
-          $scope.loginForm = {};
-        });
-
-    };
-
-}]);
-
+// LOGOUT
 angular.module('myApp').controller('logoutController',
   ['$scope', '$location', 'AuthService',
   function ($scope, $location, AuthService) {
@@ -87,6 +81,41 @@ angular.module('myApp').controller('logoutController',
 
 }]);
 
+// LOGIN
+// angular.module('myApp').controller('loginController',
+//   ['$scope', '$location', 'AuthService',
+//   function ($scope, $location, AuthService) {
+
+//     console.log(AuthService.getUserStatus());
+
+//     $scope.login = function () {
+
+//       // initial values
+//       $scope.error = false;
+//       $scope.disabled = true;
+
+//       // call login from service
+//       AuthService.login($scope.loginForm.username, $scope.loginForm.password)
+//         // handle success
+//         .then(function () {
+//           $location.path('/');
+//           $scope.disabled = false;
+//           $scope.loginForm = {};
+//         })
+//         // handle error
+//         .catch(function () {
+//           $scope.error = true;
+//           $scope.errorMessage = "Invalid username and/or password";
+//           $scope.disabled = false;
+//           $scope.loginForm = {};
+//         });
+
+//     };
+
+// }]);
+
+
+// REGISTER
 angular.module('myApp').controller('registerController',
   ['$scope', '$location', 'AuthService',
   function ($scope, $location, AuthService) {
