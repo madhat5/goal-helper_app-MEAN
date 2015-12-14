@@ -4,6 +4,7 @@
 Links:
 
 - Instructions:
+    - https://github.com/ga-students/wdi_lettuce_students/blob/master/projects/project4/project.md
     - https://github.com/ga-students/wdi_lettuce_students/blob/master/schedule.md
 
 - Project:
@@ -19,13 +20,30 @@ Links:
 ---
 Technical Requirements:
 
-- Use Mongo & Express to build an API and a front-end that consumes it
-- Create an API using at least 2 related models, one of which should be a user
-- Include all major CRUD functions in a RESTful API for at least one of those models
-- Consume your own API by making your front-end with HTML, Javascript, & jQuery
-- Add authentication to your API to restrict access to appropriate users
-- Layout and style your front-end with clean & well-formatted CSS
-- Deploy your application online so it's publically accessible
+- Build a full-stack application by making your own backend and your own front-end
+- Have an API of your design
+- Have an interactive front-end, preferably using a modern front-end framework
+- Be a complete product, which most likely means multiple relationships and CRUD functionality for at least a couple models
+- Use a database, whether that's one we've covered in class or one you want to learn
+- Implement thoughtful user stories that are significant enough to help you know which features to build and which to scrap
+- Have a visually impressive design to kick your portfolio up a notch and have something to wow future clients & employers
+- Be deployed online so it's publicly accessible
+
+Necessary Deliverables
+
+- A working API, hosted somewhere on the internet
+- A working front-end, hosted somewhere on the internet
+- A link to your hosted working app in the URL section of your Github repo
+- A git repository hosted on Github, with a link to your hosted project, and frequent commits dating back to the very beginning of the project
+- A readme.md file with:
+- An embedded screenshot of the app
+- Explanations of the technologies used
+- A couple paragraphs about the general approach you took
+- Installation instructions for any dependencies
+- Link to your user stories – who are your users, what do they want, and why?
+- Link to your wireframes – sketches of major views / interfaces in your application
+- Link to your pitch deck – documentation of your wireframes, user stories, and proposed architecture
+- Descriptions of any unsolved problems or major hurdles you had to overcome
 
 ---
 Timeline goals: (start by)
@@ -77,106 +95,146 @@ MVP
 
 Models:
 
-- post
-    - comment
-    - author
+- user
+    - username/email: string
+    - password: string?
+    - embed goals: obj
 
+- goals
+	- title: string
+	- steps: string
+		- step_completed: boolean
+	- goal_completed: boolean
 
 User story: (UPDATE)
 (MOAR MODALS!!!)
 
 - landing page:
     - log in button
-        - > opens stormpath login form as modal
+        - > opens login form (passport) as modal
     - register form
     - tutorial button
     - register buton
-        - > opens stormpath register form as modal
+        - > opens register form (passport) as modal
     - # of goals and # of goals completed
 
 
 +features:
 
-- modal for create form
-	- create post > show new post form
-- total posts display
+- 
 
 ---
 ---
 App Build Steps:
 
-- touch server.js --x--
+- server --x--
+	- mkdir server
+		- touch server/server.js 
+		- touch server/app.js
+		- mkdir routes
+		- mkdir models
 
 - npm init --x--
 	-'enter' through all the prompts
 
 - packages setup --x--
-	- npm install --save express morgan mongoose cookie-parser body-parser
-	- server.js
+	- npm install --save express morgan mongoose cookie-parser body-parser express-session passport bcrypt-nodejs passport-local passport-local-mongoose
+	- app.js
 		- dependecies
 			- var express = require('express');
-			- var morgan = require('morgan');
-			- var mongoose = require('mongoose');
-			- var cookieParser = require('cookie-parser');
-            - var bodyParser = require('body-parser');
-		- var app = express();
+			- morgan = require('morgan')
+			- mongoose = require('mongoose')
+			- cookieParser = require('cookie-parser')
+            - bodyParser = require('body-parser')
+            - expressSession = require('express-session'')
+            - passport = require('passport')
+            - path = require('path')
+            - hash = require('bcrypt-nodejs')
+            - localStrategy = require('passport-local' ).Strategy;
+		- express
+			- var app = express();
 		- middleware
 			- app.use(morgan('dev'));
 			- app.use(cookieParser());
             - app.use(bodyParser.urlencoded({ extended: true}));
+            - (ADD SCRIPT)
 		- mongo
 			- mongoose.connect('mongodb://localhost/db_name');
+		- passport
+			- (ADD SCRIPT)
+		- routes
+			- (ADD SCRIPT)
+		- error
+			- (ADD SCRIPT)
 
 - app port & listener --x--
 	- server.js
+		- var debug = require('debug')('passport-mongo'),
+    	- app = require('./app');
 		- var port = process.env.PORT || 3000;
-		- app.listen(port);
-		- console.log('Silence please...');
-		- setTimeout(function(){console.log('Curtains up...' + '\n' + 'Server started on ' + port)}, 1000);
-
-- test connection --x--
-    - setup basic route
-
-- mkdir public --x--
-	- server.js
-		- app.use(express.static('public'));
-	- touch public/index.html
-	- touch public/app.js
-	- touch public/style.css
-
-- test connection --x--
-    - setup basic route
-    - setup basic index.html/app.js
-    - launch server (nodemon/mongod) 
+		- var server = app.listen(port, function(){
+ 			debug('Silence please...' + 'Curtains up...' + '\n' + 'Server started on: ' + port)
+		});
 
 - models build --x--
     - mkdir models
-    - touch models/post.js
+    	- touch models/user.js
+    	- touch models/post.js
     - server.js
-        - var Post = require('./models/post');
+    	- var User = require('./models/user.js');
+    - user.js
+		- var mongoose = require('mongoose'),
+		- Schema = mongoose.Schema,
+		- passportLocalMongoose = require('passport-local-mongoose');
+	- var User = new Schema({ ... });
+	- User.plugin(passportLocalMongoose);
+	- var userMongoose = mongoose.model('users', User);
+	- module.exports = userMongoose;
+
+- routes --ox--
+	- touch routes/api.js
+	- build
+		- registration
+		- login
+		- logout
+	- test
+
+- mkdir client --o--
+	- touch index.html
+	- touch main.js
+	- mkdir partials
+		- touch home.html
+
+- models build --o--
+    - server.js
+    	- var Goal = require('./models/goal');
     - post.js
         - var mongoose = require('mongoose');
         - var postSchema = new mongoose.Schema({ ... });
         - var Post = mongoose.model('Post', postSchema);
         - module.exports = Post;
 
-- CDN --x--
+- CDN --o--
 	- js-cookie URL 
     - Angular
 
-- Story build --ox--
-    - server.js
-    - public/index.html
-    - public/app.js
+- Story build --o--
+    - 
 
 - CSS --o--
 	- bootstrap
 
+- safety
+    - touch .gitignore 
+        - add:
+            - node_modules
+
+- Debug:
+	- check ALL syntax in ALL files
 
 - Remaining:
-    - debug angular
-    - fonts/bootstrap/draggable posts
-    - heroku
+	- 
+
 
 ---
 ---
@@ -185,6 +243,23 @@ Reference
 - Git merging
     - https://github.com/ga-students/wdi_lettuce_students/blob/master/w08/d02/INSTRUCTOR/git_solo.md
 
+- Embedding/referencing:
+	- https://github.com/ga-students/wdi_lettuce_students/blob/master/w08/d01/INSTRUCTOR/%5Ba1%5Dmongo.md
+	- https://github.com/ga-students/wdi_lettuce_students/blob/master/w08/d01/INSTRUCTOR/%5Bb1%5Dmongoose_data_modeling.md
+
+- Passport
+	- http://mherman.org/blog/2015/07/02/handling-user-authentication-with-the-mean-stack/#.Vmove-ODGko
+	- strategy:
+		- http://www.codexpedia.com/node-js/node-js-authentication-using-passport-local-strategy/
+
+- Bootstrap
+	- http://www.tutorialrepublic.com/twitter-bootstrap-tutorial/
+
+- Angular if/else
+	- https://docs.angularjs.org/api/ng/directive/ngSwitch
+	- http://stackoverflow.com/questions/15810278/if-else-statement-in-angularjs-templates
+	
+
 
 
 
@@ -192,13 +267,23 @@ Reference
 ---
 Comments/Notes:
 
-- !!seed worked, but user input didnt
+- explain use of angular AND jquery in passport login/app setup
+	- cf client/main.js
+	- use a bunch of console.logs
 
-- didn't have my route set right (/post instead of /posts)
+- read about ng-disabled
 
-- tips:
-    - Kyle (dragable div)
-    - Katie Z (modal)
-    - Robbie (dynamic searches)
+- #!/usr/bin/env node
+    - http://stackoverflow.com/questions/15061001/what-does-bin-env-mean-at-the-top-of-a-node-js-script
+
+- 
+
+---
+---
+Shoutouts:
+
+- Kyle (dragable div)
+- Katie Z (modal)
+- Robbie (dynamic searches)
 
 
