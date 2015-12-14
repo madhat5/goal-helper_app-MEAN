@@ -224,6 +224,11 @@ App Build Steps:
 - CSS --o--
 	- bootstrap
 
+- safety
+    - touch .gitignore 
+        - add:
+            - node_modules
+
 - Debug:
 	- check ALL syntax in ALL files
 
