@@ -45,17 +45,21 @@ var routes = require('./routes/api.js');
 app.use('/user/', routes);
 
 app.get('/', function(req, res){
+  // TEST
+  // res.send('Hello');
+  // console.log('My app is up');
+
   res.sendFile(path.join(_dirname, '../client', 'index.html'));
 });
 
 // ERROR HANDLER
-app.user(function(req, res){
+app.use(function(req, res){
   var err = new Error('Oops...Not Found...Try Again');
   err.status = 404;
   next(err);
 });
 
-app.user(function(err, req, res){
+app.use(function(err, req, res){
   res.status(err.status || 500);
   res.end(JSON.stringify({
     message: err.message,

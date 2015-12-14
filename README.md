@@ -273,9 +273,17 @@ Comments/Notes:
 
 - read about ng-disabled
 
-- shoutouts:
-    - Kyle (dragable div)
-    - Katie Z (modal)
-    - Robbie (dynamic searches)
+- #!/usr/bin/env node
+    - http://stackoverflow.com/questions/15061001/what-does-bin-env-mean-at-the-top-of-a-node-js-script
+
+- 
+
+---
+---
+Shoutouts:
+
+- Kyle (dragable div)
+- Katie Z (modal)
+- Robbie (dynamic searches)
 
 

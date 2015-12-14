@@ -4,7 +4,7 @@ var express = require('express'),
     User = require('../models/user.js');
 
 // REGISTER
-router.post()('/register', function(req, res){
+router.post('/register', function(req, res){
   User.register(new User({ username: req.body.username}), req.body.password, function(err, account){
     if (err){
       return res.status(500).json({err: err});
